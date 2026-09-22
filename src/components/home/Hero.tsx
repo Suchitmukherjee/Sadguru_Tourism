@@ -24,12 +24,12 @@ export default function Hero() {
           </p>
           
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-space-sm pt-space-xs w-full sm:w-auto">
-            <Link className="flex-1 sm:flex-none inline-flex items-center justify-center gap-space-xs h-12 px-space-lg rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95" href="/tours">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-space-xs w-full sm:w-auto">
+            <Link className="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs h-12 px-space-lg rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95" href="/tours">
               <span className="material-symbols-outlined text-[20px]">explore</span>
               <span>Explore Tours</span>
             </Link>
-            <Link className="flex-1 sm:flex-none inline-flex items-center justify-center gap-space-xs h-12 px-space-lg rounded-lg bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-all active:scale-95" href="/custom-package">
+            <Link className="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs h-12 px-space-lg rounded-lg bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-all active:scale-95" href="/custom-package">
               <span className="material-symbols-outlined text-primary text-[20px]">tune</span>
               <span>Build Custom Trip</span>
             </Link>

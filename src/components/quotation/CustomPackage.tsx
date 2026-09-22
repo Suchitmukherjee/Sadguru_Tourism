@@ -13,6 +13,7 @@ const destinations = [
 ];
 
 export default function CustomPackage() {
+  const [currentStep, setCurrentStep] = useState(1);
   const [dest, setDest] = useState(destinations[0]);
   const [customDest, setCustomDest] = useState('');
   const [adults, setAdults] = useState(2);
@@ -29,9 +30,12 @@ export default function CustomPackage() {
     (children * basePrice * 0.7 * mode.multiplier * stay.multiplier)
   );
 
+  const nextStep = () => setCurrentStep(prev => Math.min(4, prev + 1));
+  const prevStep = () => setCurrentStep(prev => Math.max(1, prev - 1));
+
   return (
-    <section className="w-full py-16 md:py-24 bg-surface-container-low" id="custom-package">
-      <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+    <section className="w-full py-16 md:py-24 bg-surface-container-low relative" id="custom-package">
+      <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin mb-24 lg:mb-0">
         <div className="text-center max-w-3xl mx-auto mb-space-xl">
           <span className="inline-block px-3 py-1 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold tracking-wide uppercase mb-2">
             Tailored For Families & Groups
@@ -46,10 +50,10 @@ export default function CustomPackage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
           {/* Left: Interactive Form (8 cols) */}
-          <div className="lg:col-span-8 bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-lg">
+          <div className="order-2 lg:order-1 lg:col-span-8 bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-lg">
             
             {/* Step 1: Destination Selection */}
-            <div className="flex flex-col gap-space-xs">
+            <div className={`flex-col gap-space-xs ${currentStep === 1 ? 'flex animate-in fade-in' : 'hidden lg:flex'}`}>
               <label className="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
                 <span className="w-6 h-6 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">1</span>
                 <span>Select Destination / गंतव्यस्थान निवडा</span>
@@ -79,7 +83,7 @@ export default function CustomPackage() {
             </div>
 
             {/* Step 2: Travellers Counter & Dates */}
-            <div className="flex flex-col gap-space-xs">
+            <div className={`flex-col gap-space-xs ${currentStep === 2 ? 'flex animate-in fade-in' : 'hidden lg:flex'}`}>
               <label className="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
                 <span className="w-6 h-6 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">2</span>
                 <span>Traveller Breakdown & Date / प्रवासी संख्या आणि दिनांक</span>
@@ -125,13 +129,13 @@ export default function CustomPackage() {
             </div>
 
             {/* Step 3: Travel Mode & Stay */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+            <div className={`grid-cols-1 sm:grid-cols-2 gap-space-md ${currentStep === 3 ? 'grid animate-in fade-in' : 'hidden lg:grid'}`}>
               <div className="flex flex-col gap-space-xs">
                 <label className="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
                   <span className="w-6 h-6 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">3</span>
                   <span>Travel Mode / प्रवासाचे साधन</span>
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-2 pt-1">
                   {[
                     { id: 'bus', multiplier: 1.0, label: '2x2 AC Bus' },
                     { id: 'train', multiplier: 1.15, label: '3AC Train' },
@@ -139,7 +143,7 @@ export default function CustomPackage() {
                   ].map(m => (
                     <button 
                       key={m.id}
-                      className={`p-2.5 rounded-lg text-center font-label-sm text-label-sm font-semibold transition-all ${mode.id === m.id ? 'bg-primary-fixed/40 text-on-surface ring-2 ring-primary' : 'bg-surface-container text-on-surface hover:bg-surface-container-high'}`}
+                      className={`h-full flex flex-col items-center justify-center p-2.5 rounded-lg text-center font-label-sm text-label-sm font-semibold transition-all ${mode.id === m.id ? 'bg-primary-fixed/40 text-on-surface ring-2 ring-primary' : 'bg-surface-container text-on-surface hover:bg-surface-container-high'}`}
                       onClick={() => setMode(m)}
                       type="button"
                     >
@@ -153,7 +157,7 @@ export default function CustomPackage() {
                   <span className="w-6 h-6 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">4</span>
                   <span>Stay Category / मुक्काम श्रेणी</span>
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-2 pt-1">
                   {[
                     { id: 'std', multiplier: 1.0, label: 'Standard AC' },
                     { id: 'deluxe', multiplier: 1.25, label: '3-Star Deluxe' },
@@ -161,7 +165,7 @@ export default function CustomPackage() {
                   ].map(s => (
                     <button 
                       key={s.id}
-                      className={`p-2.5 rounded-lg text-center font-label-sm text-label-sm font-semibold transition-all ${stay.id === s.id ? 'bg-primary-fixed/40 text-on-surface ring-2 ring-primary' : 'bg-surface-container text-on-surface hover:bg-surface-container-high'}`}
+                      className={`h-full flex flex-col items-center justify-center p-2.5 rounded-lg text-center font-label-sm text-label-sm font-semibold transition-all ${stay.id === s.id ? 'bg-primary-fixed/40 text-on-surface ring-2 ring-primary' : 'bg-surface-container text-on-surface hover:bg-surface-container-high'}`}
                       onClick={() => setStay(s)}
                       type="button"
                     >
@@ -173,7 +177,7 @@ export default function CustomPackage() {
             </div>
 
             {/* Step 5: Organizer Details */}
-            <div className="flex flex-col gap-space-xs">
+            <div className={`flex-col gap-space-xs ${currentStep === 4 ? 'flex animate-in fade-in' : 'hidden lg:flex'}`}>
               <label className="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
                 <span className="w-6 h-6 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">5</span>
                 <span>Organizer Details / संपर्क माहिती</span>
@@ -184,10 +188,39 @@ export default function CustomPackage() {
                 <input className="h-11 px-3.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary" placeholder="City / Area (उदा. नागपूर, वर्धा)" type="text"/>
               </div>
             </div>
+
+            {/* Mobile Wizard Controls */}
+            <div className="lg:hidden flex items-center justify-between mt-4 pt-4 border-t border-border">
+              <button 
+                className={`px-4 py-2 rounded-lg font-label-md text-label-md font-semibold transition-colors ${currentStep > 1 ? 'bg-surface-container text-on-surface hover:bg-surface-container-high' : 'opacity-0 pointer-events-none'}`}
+                onClick={prevStep}
+                type="button"
+              >
+                Back
+              </button>
+              <div className="font-label-sm text-on-surface-variant">Step {currentStep} of 4</div>
+              {currentStep < 4 ? (
+                <button 
+                  className="px-6 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors"
+                  onClick={nextStep}
+                  type="button"
+                >
+                  Next
+                </button>
+              ) : (
+                <button 
+                  className="px-4 py-2 rounded-lg bg-tertiary text-on-tertiary font-label-md text-label-md font-semibold hover:bg-tertiary-container transition-colors"
+                  type="button"
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+
           </div>
 
           {/* Right: Live Quotation Summary Card (4 cols) */}
-          <div className="lg:col-span-4 bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl shadow-md flex flex-col gap-space-md sticky top-24">
+          <div className="order-1 lg:order-2 flex lg:col-span-4 bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl shadow-md flex-col gap-space-md sticky top-24 mb-4 lg:mb-0">
             <div className="flex items-center justify-between">
               <h3 className="font-title-lg text-title-lg text-on-surface font-bold">Estimated Quote</h3>
               <span className="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">Live Estimate</span>
@@ -217,9 +250,9 @@ export default function CustomPackage() {
 
             <div className="p-space-md rounded-xl bg-primary-fixed/25 flex flex-col gap-1">
               <span className="font-label-sm text-label-sm text-on-surface-variant">Approximate Total Group Cost:</span>
-              <div className="flex items-baseline gap-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <span className="font-headline-xl text-headline-xl text-primary font-bold">₹{totalCost.toLocaleString('en-IN')}</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">for group</span>
+                <span className="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">for group</span>
               </div>
               <p className="font-label-sm text-[11px] text-on-surface-variant mt-1">
                 * अंतिम कोटेशन तारीख, सिझन आणि प्रवाशांच्या सविस्तर मागणीनुसार अंतिम केले जाईल.

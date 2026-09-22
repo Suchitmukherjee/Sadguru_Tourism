@@ -82,16 +82,16 @@ export default function Footer() {
       </footer>
 
       {/* Floating Action Buttons */}
-      <aside aria-label="Quick Dial Bar" className="fixed bottom-0 left-0 w-full z-40 md:hidden bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_-2px_10px_rgba(0,0,0,0.06)] px-space-md py-space-sm flex items-center justify-between gap-space-sm">
-        <a className="flex-1 flex items-center justify-center gap-space-xs h-12 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold" href="tel:8446999330">
+      <aside aria-label="Quick Dial Bar" className="fixed bottom-0 left-0 w-full z-40 md:hidden bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_-2px_10px_rgba(0,0,0,0.06)] px-space-md pt-space-sm pb-[max(env(safe-area-inset-bottom),0.5rem)] flex items-center justify-between gap-space-sm">
+        <a className="flex-1 flex items-center justify-center gap-space-xs h-12 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold active:bg-surface-container-highest transition-colors" href="tel:8446999330">
           <span className="material-symbols-outlined text-primary text-[20px]">call</span>Call Nagpur Office
         </a>
-        <a className="flex-1 flex items-center justify-center gap-space-xs h-12 rounded-lg bg-tertiary text-on-tertiary font-label-md text-label-md font-semibold" href="https://wa.me/918446999330" rel="noopener noreferrer" target="_blank">
+        <a className="flex-1 flex items-center justify-center gap-space-xs h-12 rounded-lg bg-tertiary text-on-tertiary font-label-md text-label-md font-semibold active:bg-tertiary-container transition-colors" href="https://wa.me/918446999330" rel="noopener noreferrer" target="_blank">
           <span className="material-symbols-outlined text-[20px]">chat</span>WhatsApp
         </a>
       </aside>
       
-      <div className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-40 flex flex-col gap-space-sm items-end">
+      <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+5rem)] md:bottom-8 right-4 md:right-8 z-40 flex flex-col gap-space-sm items-end pb-[env(safe-area-inset-bottom)]">
         <a aria-label="Chat on WhatsApp" className="flex items-center justify-center w-14 h-14 rounded-full bg-tertiary text-on-tertiary shadow-[0_8px_16px_-4px_rgba(13,35,58,0.18)] hover:scale-105 active:scale-95 transition-all" href="https://wa.me/918446999330" rel="noopener noreferrer" target="_blank">
           <span className="material-symbols-outlined text-[28px]">chat</span>
         </a>

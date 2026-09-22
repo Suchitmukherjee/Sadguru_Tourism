@@ -47,9 +47,9 @@ export default function TourCard({ tour }: { tour: Tour }) {
               <span className="font-label-sm text-[11px] text-on-surface-variant block leading-none">per person</span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 mt-1">
+          <div className="flex flex-col sm:flex-row gap-2 mt-2 w-full">
             <TourDetailsModal tour={tour}>
-              <button type="button" className="inline-flex items-center justify-center gap-1.5 h-10 rounded-lg border border-primary text-primary hover:bg-primary/5 font-label-sm text-label-sm font-semibold transition-colors shadow-sm">
+              <button type="button" className="flex-1 w-full inline-flex items-center justify-center gap-1.5 h-11 rounded-lg border border-primary text-primary hover:bg-primary/5 font-label-sm text-label-sm font-semibold transition-colors shadow-sm">
                 <span className="material-symbols-outlined text-[18px]">visibility</span> Details
               </button>
             </TourDetailsModal>
@@ -57,7 +57,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
               href={`https://wa.me/918446999330?text=${encodeURIComponent(`Hello Sadguru Tourism, I am interested in the ${tour.titleEn} package (₹${tour.price.toLocaleString('en-IN')}). Please share details.`)}`}
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1 h-10 rounded-lg bg-tertiary text-on-tertiary hover:bg-tertiary-container font-label-sm text-label-sm font-semibold transition-colors"
+              className="flex-1 w-full inline-flex items-center justify-center gap-1 h-11 rounded-lg bg-tertiary text-on-tertiary hover:bg-tertiary-container font-label-sm text-label-sm font-semibold transition-colors"
             >
               <span className="material-symbols-outlined text-[16px]">chat</span> WhatsApp
             </a>

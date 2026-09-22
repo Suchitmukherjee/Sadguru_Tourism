@@ -200,9 +200,30 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-headline-xl {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+  }
+  .text-headline-lg {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+  }
+  .text-title-lg {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.3;
+  }
+  .px-margin {
+    padding-left: max(env(safe-area-inset-left), clamp(1rem, 4vw, 2rem));
+    padding-right: max(env(safe-area-inset-right), clamp(1rem, 4vw, 2rem));
   }
 }

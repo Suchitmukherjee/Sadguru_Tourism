@@ -49,7 +49,7 @@ export default function ContactBar() {
                 <span className="material-symbols-outlined text-primary text-[28px] mt-1 shrink-0">location_on</span>
                 <div>
                   <h3 className="font-title-lg text-title-lg text-on-surface font-bold">Nagpur Head Office</h3>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  <p className="font-body-sm text-body-sm text-on-surface-variant mt-1 break-words">
                     Shop No. 1, 1st Floor, P P Tower, Manewada Square, Nagpur, Maharashtra - 440027
                   </p>
                   <div className="mt-2 inline-flex items-center gap-1.5 text-tertiary font-label-sm text-label-sm font-semibold">
@@ -145,7 +145,7 @@ export default function ContactBar() {
                 <span className="text-primary font-label-sm text-label-sm font-semibold">Manewada Square</span>
               </div>
               <div 
-                className="w-full h-44 bg-surface-container bg-cover bg-center rounded-xl relative flex items-center justify-center shadow-inner" 
+                className="w-full h-64 lg:h-72 bg-surface-container bg-cover bg-center rounded-xl relative flex items-center justify-center shadow-inner" 
                 style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCb7XYxxiPjHuyhDyjrSwaYTh-jF47jqaZ9NvfUE5_XsFo2VptpPlbv1zfgtbC_ViIhfz16h1fsSpZC2zpP7iVtrfoNy2-TLs47gqvf5L1z7UsIgJOhdFQdkbqmJlSFkZQ-MVTbJYyRdTwPl8nfYX6l3zOQGyCoEcBi0EcS8PsE25GPy7tOXt7kVyXcDmEDBOj-FzAi1FsoRxnuBqgwTzUCzHfvEkA7gT5kYvTJ0fJ8REV-fH2G2In-')"}}
               >
                 <div className="bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-md flex items-center gap-1.5 text-primary font-label-sm text-label-sm font-bold">

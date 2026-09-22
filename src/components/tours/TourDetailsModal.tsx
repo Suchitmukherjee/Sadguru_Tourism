@@ -263,16 +263,21 @@ Please share booking details.`;
                                 <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                                 
                                 <div 
-                                  className={`rounded-xl border transition-all cursor-pointer overflow-hidden ${
+                                  className={`rounded-xl border transition-all overflow-hidden ${
                                     isExpanded 
                                       ? 'bg-surface-container-lowest border-outline-variant shadow-sm' 
-                                      : 'bg-surface-container-lowest border-border hover:border-outline-variant/50 hover:bg-surface-container-lowest/50'
+                                      : 'bg-surface-container-lowest border-border md:border-outline-variant md:shadow-sm hover:border-outline-variant/50 hover:bg-surface-container-lowest/50 md:hover:border-outline-variant md:hover:bg-surface-container-lowest'
                                   }`}
                                 >
                                   {/* Accordion Header */}
                                   <div 
-                                    className="p-4 flex items-center justify-between"
-                                    onClick={() => toggleDay(day.day)}
+                                    className="p-4 flex items-center justify-between md:cursor-default cursor-pointer"
+                                    onClick={() => {
+                                      // Only toggle on mobile
+                                      if (window.innerWidth < 768) {
+                                        toggleDay(day.day);
+                                      }
+                                    }}
                                   >
                                     <div>
                                       <div className="flex items-center gap-2 mb-1">
@@ -281,65 +286,63 @@ Please share booking details.`;
                                       </div>
                                       <h4 className="font-title-md font-bold text-on-surface">{day.title}</h4>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-on-surface-variant">
+                                    <div className="md:hidden w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 text-on-surface-variant">
                                       <span className="text-lg font-bold leading-none">{isExpanded ? '−' : '+'}</span>
                                     </div>
                                   </div>
 
                                   {/* Accordion Body */}
-                                  {isExpanded && (
-                                    <div className="px-4 pb-5 pt-1 border-t border-border/50 animate-in slide-in-from-top-2">
-                                      <p className="text-on-surface-variant mb-4">{day.description}</p>
+                                  <div className={`px-4 pb-5 pt-1 border-t border-border/50 ${!isExpanded ? 'hidden md:block' : 'animate-in slide-in-from-top-2'}`}>
+                                    <p className="text-on-surface-variant mb-4">{day.description}</p>
+                                    
+                                    <div className="space-y-4">
+                                      {day.morning && (
+                                        <div>
+                                          <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Morning</h5>
+                                          <p className="text-sm text-on-surface-variant">{day.morning}</p>
+                                        </div>
+                                      )}
+                                      {day.afternoon && (
+                                        <div>
+                                          <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Afternoon</h5>
+                                          <p className="text-sm text-on-surface-variant">{day.afternoon}</p>
+                                        </div>
+                                      )}
+                                      {day.evening && (
+                                        <div>
+                                          <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Evening</h5>
+                                          <p className="text-sm text-on-surface-variant">{day.evening}</p>
+                                        </div>
+                                      )}
                                       
-                                      <div className="space-y-4">
-                                        {day.morning && (
-                                          <div>
-                                            <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Morning</h5>
-                                            <p className="text-sm text-on-surface-variant">{day.morning}</p>
-                                          </div>
-                                        )}
-                                        {day.afternoon && (
-                                          <div>
-                                            <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Afternoon</h5>
-                                            <p className="text-sm text-on-surface-variant">{day.afternoon}</p>
-                                          </div>
-                                        )}
-                                        {day.evening && (
-                                          <div>
-                                            <h5 className="font-label-sm text-xs font-bold text-on-surface uppercase tracking-wider mb-1">Evening</h5>
-                                            <p className="text-sm text-on-surface-variant">{day.evening}</p>
-                                          </div>
-                                        )}
-                                        
-                                        {/* Sightseeing Block */}
-                                        {day.sightseeing && day.sightseeing.length > 0 && (
-                                          <div className="bg-surface-container-low p-3 rounded-lg border border-border mt-4">
-                                            <h5 className="font-label-sm text-xs font-bold text-on-surface mb-2">Today's Sightseeing</h5>
-                                            <ul className="space-y-1">
-                                              {day.sightseeing.map((site, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-on-surface-variant">
-                                                  <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                                                  <span>{site}</span>
-                                                </li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        )}
+                                      {/* Sightseeing Block */}
+                                      {day.sightseeing && day.sightseeing.length > 0 && (
+                                        <div className="bg-surface-container-low p-3 rounded-lg border border-border mt-4">
+                                          <h5 className="font-label-sm text-xs font-bold text-on-surface mb-2">Today's Sightseeing</h5>
+                                          <ul className="space-y-1">
+                                            {day.sightseeing.map((site, i) => (
+                                              <li key={i} className="flex items-start gap-2 text-sm text-on-surface-variant">
+                                                <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                                                <span>{site}</span>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
 
-                                        {/* Notes */}
-                                        {day.notes && day.notes.length > 0 && (
-                                          <div className="mt-4">
-                                            <h5 className="font-label-sm text-xs font-bold text-error uppercase tracking-wider mb-1">Important Notes</h5>
-                                            <ul className="list-disc pl-4 space-y-1">
-                                              {day.notes.map((note, i) => (
-                                                <li key={i} className="text-sm text-on-surface-variant">{note}</li>
-                                              ))}
-                                            </ul>
-                                          </div>
-                                        )}
-                                      </div>
+                                      {/* Notes */}
+                                      {day.notes && day.notes.length > 0 && (
+                                        <div className="mt-4">
+                                          <h5 className="font-label-sm text-xs font-bold text-error uppercase tracking-wider mb-1">Important Notes</h5>
+                                          <ul className="list-disc pl-4 space-y-1">
+                                            {day.notes.map((note, i) => (
+                                              <li key={i} className="text-sm text-on-surface-variant">{note}</li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
                                     </div>
-                                  )}
+                                  </div>
                                 </div>
                               </div>
                             );
